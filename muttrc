@@ -4,6 +4,13 @@
 
 source ~/.muttrc.authentication
 
+# muttrc.authentication file provides the values for the following keys
+
+#set imap_user = 
+#set imap_pass = 
+#set smtp_url = 
+#set smtp_pass = 
+
 # Email Settings
 
 set from = 'senthil@uthcode.com'
