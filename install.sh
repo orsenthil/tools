@@ -7,6 +7,7 @@ ln -f -s "${BASEDIR}"/vimrc ~/.vimrc
 
 # git
 ln -f -s "${BASEDIR}"/gitconfig ~/.gitconfig
+ln -f -s "${BASEDIR}"/gitignore_global ~/.gitignore_global
 
 # bashrc
 ln -f -s "${BASEDIR}"/bashrc ~/.bashrc
