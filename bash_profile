@@ -28,13 +28,13 @@ use-java () {
 function git-empty-commit() { git commit --allow-empty -m "empty commit to trigger notification. Bacon:test"; }
 
 # gnu coreutils come later in the PATH
-PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
+# PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 
 # mysql
 
 PATH="/usr/local/mysql/bin:$PATH"
 
-MANPATH="$MANPATH:/usr/local/opt/coreutils/libexec/gnuman"
+# MANPATH="$MANPATH:/usr/local/opt/coreutils/libexec/gnuman"
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
@@ -326,3 +326,11 @@ PERL_MM_OPT="INSTALL_BASE=/Users/senthilkumaran/perl5"; export PERL_MM_OPT;
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+
+# Prefer GNU Toolchain on Mac
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+# Anaconda Python
+
+export PATH=$HOME/anaconda/bin:$PATH
