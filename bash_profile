@@ -28,13 +28,13 @@ use-java () {
 function git-empty-commit() { git commit --allow-empty -m "empty commit to trigger notification. Bacon:test"; }
 
 # gnu coreutils come later in the PATH
-# PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
+PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 
 # mysql
 
 PATH="/usr/local/mysql/bin:$PATH"
 
-# MANPATH="$MANPATH:/usr/local/opt/coreutils/libexec/gnuman"
+MANPATH="$MANPATH:/usr/local/opt/coreutils/libexec/gnuman"
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
@@ -87,12 +87,6 @@ export BLOCKSIZE=1k
 #   ------------------------------------------------------------
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-
-# pyenv
-
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -328,8 +322,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # Prefer GNU Toolchain on Mac
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+#export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Anaconda Python
 
