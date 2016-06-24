@@ -328,3 +328,7 @@ fi
 # Anaconda Python
 
 export PATH=$HOME/anaconda/bin:$PATH
+
+configurePython() {
+    CPPFLAGS="-I$(brew --prefix openssl)/include"   LDFLAGS="-L$(brew --prefix openssl)/lib"   ./configure --with-pydebug
+}
