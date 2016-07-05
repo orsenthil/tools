@@ -19,6 +19,9 @@ ln -f -s "${BASEDIR}"/bash_profile ~/.bash_profile
 ln -f -s "${BASEDIR}"/muttrc.colors ~/.muttrc.colors
 ln -f -s "${BASEDIR}"/muttrc ~/.muttrc
 
+# mailcap
+ln -f -s "${BASEDIR}"/mailcap ~/.mailcap
+
 # Xdefaults for x2go
 ln -f -s "${BASEDIR}"/Xdefaults ~/.Xdefaults
 

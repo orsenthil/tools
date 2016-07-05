@@ -29,6 +29,7 @@ set ssl_force_tls = yes
 # Html Emails
 
 auto_view text/html
+alternative_order text/html text/enriched text/plain
 
 # colors
 

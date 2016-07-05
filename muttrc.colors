@@ -1,7 +1,5 @@
 # vim: filetype=muttrc
 
-#
-#
 # make sure that you are using mutt linked against slang, not ncurses, or
 # suffer the consequences of weird color issues. use "mutt -v" to check this.
 
@@ -31,7 +29,6 @@ color message       color37         color234
 color markers       color160        color254        
 color attachment    color254        color234        
 color search        color61         color234        
-#color status        J_black         J_status        
 color status        color241        color235        
 color indicator     color234        color136        
 color tree          color136        color234                                    # arrow in threads
