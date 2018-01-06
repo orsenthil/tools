@@ -1,31 +1,67 @@
 #!/bin/bash
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 # Senthil's changes
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
-export COVERAGEDIR=$HOME/python/coveragepy
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export LESS=-Xr
 export PAGER=less
+export LC_ALL=en_US.utf-8
+export LANG=en_US.utf-8
 
 alias how2=/usr/local/Cellar/node/5.5.0/libexec/npm/lib/node_modules/how2/bin/how2
 
+export HISTTIMEFORMAT="%F %T  "
+
 # http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
 # Avoid duplicates
-export HISTCONTROL=ignoredups:erasedups  
+export HISTCONTROL=ignoredups:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 
+# Add this code to your .bashrc to save persistent history
+#
+# See http://eli.thegreenplace.net/2013/06/11/keeping-persistent-history-in-bash
+# for details.
+#
+# Note, HISTTIMEFORMAT has to be set and end with at least one space; for
+# example:
+#
+#   export HISTTIMEFORMAT="%F %T  "
+#
+# If your format is set differently, you'll need to change the regex that
+# matches history lines below.
+#
+# Eli Bendersky (http://eli.thegreenplace.net)
+# This code is in the public domain
+
+log_bash_persistent_history()
+{
+  local rc=$?
+  [[ $(history 1) =~ ^\ *[0-9]+\ +([^\ ]+\ [^\ ]+)\ +(.*)$ ]]
+  local date_part="${BASH_REMATCH[1]}"
+  local command_part="${BASH_REMATCH[2]}"
+  if [ "$command_part" != "$PERSISTENT_HISTORY_LAST" ]
+  then
+    echo $date_part "|" "$command_part" >> ~/.persistent_history
+    export PERSISTENT_HISTORY_LAST="$command_part"
+  fi
+}
+
+# Stuff to do on PROMPT_COMMAND
+run_on_prompt_command()
+{
+    log_bash_persistent_history
+}
+
+PROMPT_COMMAND="run_on_prompt_command"
+
+
 # After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 use-java () {
     export JAVA_HOME=`/usr/libexec/java_home -v 1.$1`
 }
-
-function git-empty-commit() { git commit --allow-empty -m "empty commit to trigger notification. Bacon:test"; }
 
 # gnu coreutils come later in the PATH
 PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
@@ -306,7 +342,9 @@ httpHeaders () { /usr/bin/curl -I -L $@ ; }             # httpHeaders:      Grab
 #   -------------------------------------------------------------------
 httpDebug () { /usr/bin/curl $@ -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+getSong() {
+        youtube-dl --extract-audio --audio-format mp3  -o "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" $@
+}
 
 PATH="$HOME/perl5/bin${PATH+:}${PATH}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
@@ -325,10 +363,46 @@ fi
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 #export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-# Anaconda Python
-
-export PATH=$HOME/anaconda/bin:$PATH
-
 configurePython() {
     CPPFLAGS="-I$(brew --prefix openssl)/include"   LDFLAGS="-L$(brew --prefix openssl)/lib"   ./configure --with-pydebug
 }
+
+# MySQL Installation
+export PATH=/usr/local/mysql/bin:$PATH
+
+# Colorized Man Pages
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
+}
+
+# path to the DCOS CLI binary
+if [[ "$PATH" != *"/Users/senthil/dcos/dcos/bin"* ]];
+  then export PATH=$PATH:/Users/senthil/dcos/dcos/bin;
+fi
+
+# chruby
+
+source '/usr/local/share/chruby/chruby.sh'
+chruby 2.3.1
+
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Set the location of your HISTFILE
+export HISTFILE=/Users/senthil/.bash_history
+export HISTFILESIZE=10000000000000
+export HISTSIZE=800000
+
+# GO language support.
+
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/senthil/bin
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
