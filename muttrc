@@ -34,3 +34,21 @@ alternative_order text/html text/enriched text/plain
 # colors
 
 source ~/.muttrc.colors
+
+# threading
+# https://heipei.net/2009/09/10/mutt-threading-like-a-pro/
+set sort="threads"
+set strict_threads="yes"
+
+set sort_browser="reverse-date"
+set sort_aux="last-date-received"
+
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
+
+set index_format="%?M?+& ?%2M %2e %Z %-20.20F (%4c) %s"
+
+# wraping
+set wrap=80
+set smart_wrap
