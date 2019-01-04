@@ -1,0 +1,8 @@
+[user]
+  email = senthil@uthcode.com
+  name = Senthil Kumaran
+[push]
+	default = simple
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
