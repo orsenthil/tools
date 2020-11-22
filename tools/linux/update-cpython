@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pushd /home/senthil
+    pushd /home/senthil/github/cpython
+        git pull upstream
+        git checkout master
+        git rebase upstream/master
+        make clean
+        ./configure --prefix=/home/senthil/master/cpython
+        make
+        make install
+        /home/senthil/master/cpython/bin/python3 -m venv --copies /home/senthil/master/cpython/venv
+    popd
+popd
