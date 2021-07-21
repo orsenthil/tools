@@ -1,6 +1,7 @@
 # vim: filetype=muttrc
 
 # Credentials
+# Copy it from a different machine or write it again. Don't check-in credentials.
 
 source ~/.muttrc.authentication
 
@@ -26,10 +27,10 @@ source ~/.muttrc.authentication
 #set ssl_starttls = yes
 #set ssl_force_tls = yes
 
-# Html Emails
-
-auto_view text/html
-alternative_order text/html text/enriched text/plain
+# G to get mail
+bind index G imap-fetch-mail
+set charset = "utf-8"
+set record = ''
 
 # colors
 
@@ -52,3 +53,13 @@ set index_format="%?M?+& ?%2M %2e %Z %-20.20F (%4c) %s"
 # wraping
 set wrap=80
 set smart_wrap
+
+
+# Html Emails
+
+#set mailcap_path = ~/.mutt/mailcap
+
+auto_view text/html
+alternative_order text/html text/enriched text/plain
+
+macro attach 'V' "<pipe-entry>iconv -c --to-code=UTF8 > ~/.cache/mutt/mail.html<enter><shell-escape>$BROWSER ~/.cache/mutt/mail.html<enter>"
