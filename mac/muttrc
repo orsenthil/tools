@@ -13,18 +13,18 @@ source ~/.muttrc.authentication
 
 # Email Settings
 
-set from = 'senthil@uthcode.com'
-set realname = 'Senthil Kumaran'
-set folder = 'imaps://imap.gmail.com:993'
-set spoolfile = '+INBOX'
-set postponed = '+[Gmail]/Drafts'
-set header_cache = ~/.mutt/cache/headers
-set message_cachedir = ~/.mutt/cache/bodies
-set certificate_file = ~/.mutt/certificates
-set move = no
-set smtp_authenticators = ‘gssapi:login’
-set ssl_starttls = yes
-set ssl_force_tls = yes
+#set from = 'senthil@uthcode.com'
+#set realname = 'Senthil Kumaran'
+#set folder = 'imaps://imap.gmail.com:993'
+#set spoolfile = '+INBOX'
+#set postponed = '+[Gmail]/Drafts'
+#set header_cache = ~/.mutt/cache/headers
+#set message_cachedir = ~/.mutt/cache/bodies
+#set certificate_file = ~/.mutt/certificates
+#set move = no
+#set smtp_authenticators = ‘gssapi:login’
+#set ssl_starttls = yes
+#set ssl_force_tls = yes
 
 # Html Emails
 

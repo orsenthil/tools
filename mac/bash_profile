@@ -403,6 +403,9 @@ export HISTSIZE=800000
 
 # GO language support.
 
-export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/senthil/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/senthilx/bin:/Users/senthilx/go
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export PATH=$HOME/.toolbox/bin:$PATH
+
+export PS1='[\u@\h:\w]\$ '
