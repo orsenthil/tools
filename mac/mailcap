@@ -1,4 +1,4 @@
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
+# text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
 ## MS Word documents
 #application/msword; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
@@ -11,11 +11,11 @@ text/html; w3m -I %{charset} -T text/html; copiousoutput;
 #image/gif; ~/.mutt/view_attachment.sh %s gif
 ##
 ## # PDFs
-#application/pdf; ~/.mutt/view_attachment.sh %s pdf
+application/pdf; ~/.mutt/view_attachment.sh %s pdf
 #
 ##
 ## # HTML
-#text/html; ~/.mutt/view_attachment.sh %s html; copiousoutput
+text/html; ~/.mutt/view_attachment.sh %s html; copiousoutput
 ##
 ## # Unidentified files
-#application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
+application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
